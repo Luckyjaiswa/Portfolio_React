@@ -1,0 +1,163 @@
+/* src/index.css
+   Global stylesheet — Tailwind CSS v4 import + custom CSS variables + global resets.
+   All design tokens (colors, fonts, spacing) are defined here as CSS custom properties
+   so every component can reference them consistently. */
+
+/* ─── Google Fonts — must be first @import ───────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+/* ─── Design Tokens ──────────────────────────────────────────────────────── */
+:root {
+  /* Color palette */
+  --color-bg:        #0a0e17;       /* deep navy-black */
+  --color-surface:   #111827;       /* slightly lighter surface */
+  --color-surface-2: #1a2235;       /* card surface */
+  --color-border:    #1e2d45;       /* subtle border */
+  --color-accent:    #00d4ff;       /* electric cyan/teal */
+  --color-accent-dim:#0099bb;       /* dimmer accent for gradients */
+  --color-text:      #e2e8f0;       /* primary text */
+  --color-muted:     #64748b;       /* muted/secondary text */
+  --color-heading:   #f1f5f9;       /* near-white headings */
+
+  /* Typography */
+  --font-sans:  'Inter', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Radii */
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
+}
+
+/* ─── Light-mode overrides ──────────────────────────────────────────────── */
+[data-theme="light"] {
+  --color-bg:        #f8fafc;
+  --color-surface:   #ffffff;
+  --color-surface-2: #f1f5f9;
+  --color-border:    #e2e8f0;
+  --color-accent:    #0284c7;
+  --color-accent-dim:#0369a1;
+  --color-text:      #1e293b;
+  --color-muted:     #64748b;
+  --color-heading:   #0f172a;
+}
+
+/* ─── Global Reset & Base ────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ─── Scrollbar (dark) ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--color-accent);
+  color: #000;
+}
+
+/* ─── Utility classes not in Tailwind's default set ─────────────────────── */
+.font-mono  { font-family: var(--font-mono); }
+.font-sans  { font-family: var(--font-sans); }
+.text-accent { color: var(--color-accent); }
+.bg-surface  { background-color: var(--color-surface); }
+.bg-surface-2 { background-color: var(--color-surface-2); }
+.border-theme { border-color: var(--color-border); }
+
+/* ─── Cursor blink for typing animation ─────────────────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background-color: var(--color-accent);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 1s step-start infinite;
+}
+
+/* ─── Reduced motion preference: disable all animations ─────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ─── Focus outline for accessibility ──────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Section spacing helper ────────────────────────────────────────────── */
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+/* ─── Alternating section backgrounds — subtle depth, no jarring colour jumps ── */
+/* Even sections (About, Skills, Experience, Certifications) get a slightly
+   lighter surface to visually separate them from the base background. */
+#about,
+#skills,
+#certifications {
+  background-color: var(--color-surface);
+}
+
+/* ─── Input & Textarea placeholder colour ─────────────────────────────────── */
+/* Without this, some browsers show white/grey placeholder that clashes with    */
+/* dark surface backgrounds or the parent's text colour.                        */
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-muted);
+  opacity: 1; /* Firefox reduces opacity by default */
+}
+
+/* ─── Remove browser autofill yellow/blue background on inputs ───────────── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-surface-2) inset !important;
+  -webkit-text-fill-color: var(--color-text) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ─── Smooth section transition for alternating backgrounds ──────────────── */
+section {
+  transition: background-color 0.3s ease;
+}
