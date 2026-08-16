@@ -1,55 +1,71 @@
 // src/components/shared/SectionHeading.jsx
-// Reusable section heading used by every major section.
-// Renders a small monospace accent label, a large heading, and a thin accent underline.
-//
-// v2 FIX: switched from variant-name propagation to explicit initial/animate objects
-// so the heading always animates correctly regardless of parent context.
+// Modern signature section heading matching the target developer portfolio.
 
 import { motion } from 'framer-motion'
 
 /**
  * SectionHeading
- * @param {string}  label        — small uppercase accent label (e.g. "// featured work")
- * @param {string}  heading      — the large section title (e.g. "Projects")
- * @param {object}  controls     — Framer Motion animation controls from useScrollAnimation
- * @param {object}  forwardedRef — ref for InView detection (triggers the controls)
+ * @param {string}  tag          — badge pill tag (e.g. ">_ WHO I AM")
+ * @param {string}  titlePrimary — first part of title (e.g. "Engineering Story & ")
+ * @param {string}  titleAccent  — gradient highlight part of title (e.g. "Background")
+ * @param {string}  subtitle     — explanatory sentence below the heading
+ * @param {object}  controls     — Framer Motion animation controls
+ * @param {object}  forwardedRef — ref for scroll in-view triggering
  */
-export default function SectionHeading({ label, heading, controls, forwardedRef }) {
+export default function SectionHeading({
+  tag,
+  titlePrimary,
+  titleAccent,
+  subtitle,
+  controls,
+  forwardedRef,
+}) {
   return (
     <motion.div
       ref={forwardedRef}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 24 }}
       animate={controls}
       variants={{
-        visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-        hidden:  { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+        hidden:  { opacity: 0, y: 24 },
       }}
-      className="mb-12 md:mb-16"
+      className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
     >
-      {/* Small monospace accent label above the heading */}
-      <span
-        className="font-mono text-sm tracking-widest uppercase"
-        style={{ color: 'var(--color-accent)' }}
-      >
-        {label}
-      </span>
+      {/* ─── Glowing Terminal Badge Pill ─────────────────────────────────── */}
+      {tag && (
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-4 text-xs font-mono font-medium tracking-wider uppercase glow-pill"
+          style={{
+            backgroundColor: 'rgba(0, 242, 254, 0.08)',
+            color:           'var(--color-accent)',
+            borderColor:     'rgba(0, 242, 254, 0.25)',
+          }}
+        >
+          <span className="text-xs">{tag}</span>
+        </div>
+      )}
 
-      {/* Main section heading */}
+      {/* ─── Large Dual-Color Heading ─────────────────────────────────────── */}
       <h2
-        className="mt-2 text-3xl md:text-4xl font-bold tracking-tight"
-        style={{
-          color:      'var(--color-heading)',
-          fontFamily: 'var(--font-mono)',
-        }}
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight font-heading leading-[1.25] sm:leading-[1.2] text-slate-100 mb-4"
       >
-        {heading}
+        {titlePrimary}{' '}
+        {titleAccent && (
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-cyan-400 to-blue-500">
+            {titleAccent}
+          </span>
+        )}
       </h2>
 
-      {/* Short accent underline bar */}
-      <div
-        className="mt-3 h-0.5 w-12 rounded-full"
-        style={{ backgroundColor: 'var(--color-accent)' }}
-      />
+      {/* ─── Subtitle Description ────────────────────────────────────────── */}
+      {subtitle && (
+        <p
+          className="text-sm md:text-base leading-relaxed max-w-2xl mx-auto"
+          style={{ color: 'var(--color-muted)' }}
+        >
+          {subtitle}
+        </p>
+      )}
     </motion.div>
   )
 }
+

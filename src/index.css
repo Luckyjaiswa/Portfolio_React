@@ -1,29 +1,36 @@
 /* src/index.css
    Global stylesheet — Tailwind CSS v4 import + custom CSS variables + global resets.
-   All design tokens (colors, fonts, spacing) are defined here as CSS custom properties
-   so every component can reference them consistently. */
+   Modern high-tech developer aesthetic matching target portfolio. */
 
-/* ─── Google Fonts — must be first @import ───────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+/* ─── Google Fonts — Outfit + Inter + JetBrains Mono ──────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @import "tailwindcss";
 
 /* ─── Design Tokens ──────────────────────────────────────────────────────── */
 :root {
-  /* Color palette */
-  --color-bg:        #0a0e17;       /* deep navy-black */
-  --color-surface:   #111827;       /* slightly lighter surface */
-  --color-surface-2: #1a2235;       /* card surface */
-  --color-border:    #1e2d45;       /* subtle border */
-  --color-accent:    #00d4ff;       /* electric cyan/teal */
-  --color-accent-dim:#0099bb;       /* dimmer accent for gradients */
-  --color-text:      #e2e8f0;       /* primary text */
-  --color-muted:     #64748b;       /* muted/secondary text */
-  --color-heading:   #f1f5f9;       /* near-white headings */
+  /* Color palette - Deep cyber dark */
+  --color-bg:        #060913;       /* ultra-deep navy obsidian */
+  --color-surface:   #0c1322;       /* dark glass surface */
+  --color-surface-2: #111a2e;       /* card surface */
+  --color-surface-3: #18243e;       /* elevated surface */
+  --color-border:    #1e2d4a;       /* sleek border */
+  --color-border-glow: rgba(56, 189, 248, 0.25);
+  
+  --color-accent:    #00f2fe;       /* electric cyan */
+  --color-accent-dim:#0284c7;       /* deep sky */
+  --color-emerald:   #10b981;       /* live badge green */
+  --color-purple:    #a855f7;       /* accent purple */
+  --color-amber:     #f59e0b;       /* warning/badge amber */
+  
+  --color-text:      #cbd5e1;       /* high-readability slate-300 */
+  --color-muted:     #8fa0bc;       /* secondary text */
+  --color-heading:   #f1f5f9;       /* soft off-white to eliminate eye strain/halation */
 
   /* Typography */
-  --font-sans:  'Inter', system-ui, sans-serif;
-  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+  --font-heading: 'Outfit', 'Inter', sans-serif;
+  --font-sans:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
 
   /* Radii */
   --radius-card: 1rem;
@@ -32,14 +39,19 @@
 
 /* ─── Light-mode overrides ──────────────────────────────────────────────── */
 [data-theme="light"] {
-  --color-bg:        #f8fafc;
+  --color-bg:        #f0f4f8;
   --color-surface:   #ffffff;
-  --color-surface-2: #f1f5f9;
-  --color-border:    #e2e8f0;
+  --color-surface-2: #f8fafc;
+  --color-surface-3: #e2e8f0;
+  --color-border:    #cbd5e1;
+  --color-border-glow: rgba(2, 132, 199, 0.25);
   --color-accent:    #0284c7;
   --color-accent-dim:#0369a1;
-  --color-text:      #1e293b;
-  --color-muted:     #64748b;
+  --color-emerald:   #059669;
+  --color-purple:    #7c3aed;
+  --color-amber:     #d97706;
+  --color-text:      #0f172a;
+  --color-muted:     #475569;
   --color-heading:   #0f172a;
 }
 
@@ -61,28 +73,107 @@ body {
   font-family: var(--font-sans);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ─── Scrollbar (dark) ──────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
+/* ─── Cyber Tech Grid Pattern (5-7% opacity for subtle, non-intrusive texture) ─── */
+.cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+[data-theme="light"] .cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
+::-webkit-scrollbar-thumb { 
+  background: var(--color-surface-3); 
+  border-radius: 4px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
 
 /* ─── Selection ──────────────────────────────────────────────────────────── */
 ::selection {
-  background: var(--color-accent);
-  color: #000;
+  background: #00f2fe;
+  color: #060913;
 }
 
-/* ─── Utility classes not in Tailwind's default set ─────────────────────── */
+/* ─── Typography & Utility Classes ───────────────────────────────────────── */
+.font-heading { font-family: var(--font-heading); }
 .font-mono  { font-family: var(--font-mono); }
 .font-sans  { font-family: var(--font-sans); }
+
 .text-accent { color: var(--color-accent); }
 .bg-surface  { background-color: var(--color-surface); }
 .bg-surface-2 { background-color: var(--color-surface-2); }
 .border-theme { border-color: var(--color-border); }
+
+/* ─── Glassmorphism card styles ──────────────────────────────────────────── */
+.glass-card {
+  background: rgba(12, 19, 34, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 16px 40px -12px rgba(0, 242, 254, 0.18);
+}
+
+[data-theme="light"] .glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(2, 132, 199, 0.15);
+}
+
+[data-theme="light"] .glass-card:hover {
+  border-color: rgba(2, 132, 199, 0.4);
+  box-shadow: 0 16px 40px -12px rgba(2, 132, 199, 0.15);
+}
+
+/* ─── Glow pill badge ────────────────────────────────────────────────────── */
+.glow-pill {
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  box-shadow: 0 0 15px -3px rgba(0, 242, 254, 0.15);
+}
+
+/* ─── Glowing CTA button ─────────────────────────────────────────────────── */
+.glow-button {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  color: #060913;
+  box-shadow: 0 0 25px -4px rgba(0, 242, 254, 0.5);
+  transition: all 0.25s ease;
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 35px -2px rgba(0, 242, 254, 0.75);
+  transform: translateY(-2px);
+}
+
+/* ─── Section spacing ────────────────────────────────────────────────────── */
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+  }
+}
 
 /* ─── Cursor blink for typing animation ─────────────────────────────────── */
 @keyframes blink {
@@ -91,63 +182,31 @@ body {
 }
 .cursor-blink {
   display: inline-block;
-  width: 2px;
+  width: 3px;
   height: 1.1em;
   background-color: var(--color-accent);
-  margin-left: 2px;
+  margin-left: 3px;
   vertical-align: middle;
   animation: blink 1s step-start infinite;
 }
 
-/* ─── Reduced motion preference: disable all animations ─────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  html { scroll-behavior: auto; }
+/* ─── Live pulsing indicator ────────────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.6; }
 }
 
-/* ─── Focus outline for accessibility ──────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
-  border-radius: 4px;
+.pulse-dot {
+  animation: pulse-glow 2s infinite ease-in-out;
 }
 
-/* ─── Section spacing helper ────────────────────────────────────────────── */
-.section-padding {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
-@media (min-width: 768px) {
-  .section-padding {
-    padding-top: 7rem;
-    padding-bottom: 7rem;
-  }
-}
-
-/* ─── Alternating section backgrounds — subtle depth, no jarring colour jumps ── */
-/* Even sections (About, Skills, Experience, Certifications) get a slightly
-   lighter surface to visually separate them from the base background. */
-#about,
-#skills,
-#certifications {
-  background-color: var(--color-surface);
-}
-
-/* ─── Input & Textarea placeholder colour ─────────────────────────────────── */
-/* Without this, some browsers show white/grey placeholder that clashes with    */
-/* dark surface backgrounds or the parent's text colour.                        */
+/* ─── Input & Textarea reset ────────────────────────────────────────────── */
 input::placeholder,
 textarea::placeholder {
   color: var(--color-muted);
-  opacity: 1; /* Firefox reduces opacity by default */
+  opacity: 0.8;
 }
 
-/* ─── Remove browser autofill yellow/blue background on inputs ───────────── */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -157,7 +216,9 @@ textarea:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-/* ─── Smooth section transition for alternating backgrounds ──────────────── */
-section {
-  transition: background-color 0.3s ease;
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
+

@@ -1,110 +1,95 @@
 // src/components/shared/ProjectCard.jsx
-// Reusable card for displaying a single project.
-// Features:
-//   - Subtle hover-scale (1.03x) via Framer Motion
-//   - Tech badge pills
-//   - GitHub / Live Demo icon links
-//   - NO flip/tilt/parallax effects
-//
-// FIX: Card now uses min-height so both cards in a row match each other's height
-// FIX: Link anchors use flex so icons always render correctly
-// FIX: Added a top accent line on hover for a more polished feel
+// Modern feature-rich Project Card matching target portfolio design.
 
 import { motion } from 'framer-motion'
-import { FiGithub, FiExternalLink } from 'react-icons/fi'
-import SkillBadge from './SkillBadge'
+import { FiGithub, FiExternalLink, FiCheckCircle } from 'react-icons/fi'
 
 export default function ProjectCard({ project }) {
   return (
     <motion.article
-      whileHover={{ scale: 1.025, transition: { duration: 0.2 } }}
-      className="relative flex flex-col h-full rounded-xl p-6 md:p-7 group"
-      style={{
-        backgroundColor: 'var(--color-surface-2)',
-        border:          '1px solid var(--color-border)',
-        // No resting shadow — clean by default
-      }}
+      whileHover={{ y: -6, transition: { duration: 0.25, ease: 'easeOut' } }}
+      className="relative flex flex-col h-full rounded-2xl p-6 sm:p-7 glass-card group overflow-hidden"
     >
-      {/* ─── Hover glow shadow (CSS group-hover, zero JS) ────────────────────── */}
-      <div
-        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        style={{ boxShadow: '0 20px 60px -12px rgba(0, 212, 255, 0.14)' }}
-      />
+      {/* ─── Ambient Glow on Hover ─── */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-      {/* ─── Thin accent top border on hover ─────────────────────────────────── */}
-      <div
-        className="absolute top-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full pointer-events-none"
-        style={{ backgroundColor: 'var(--color-accent)' }}
-      />
-
-      {/* ─── Header: title + period ──────────────────────────────────────────── */}
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <h3
-          className="text-base md:text-lg font-semibold leading-snug flex-1"
-          style={{ color: 'var(--color-heading)', fontFamily: 'var(--font-mono)' }}
-        >
-          {project.title}
-        </h3>
-        <span
-          className="shrink-0 text-xs font-mono px-2.5 py-1 rounded-md whitespace-nowrap"
-          style={{
-            color:           'var(--color-accent)',
-            backgroundColor: 'rgba(0, 212, 255, 0.08)',
-          }}
-        >
+      {/* ─── Category & Date Header ─── */}
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <span className="text-xs font-mono font-medium px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+          {project.category || 'Engineering Project'}
+        </span>
+        <span className="text-xs font-mono text-slate-400">
           {project.period}
         </span>
       </div>
 
-      {/* ─── Description ─────────────────────────────────────────────────────── */}
-      <p
-        className="text-sm leading-relaxed mb-5 flex-grow"
-        style={{ color: 'var(--color-muted)' }}
-      >
+      {/* ─── Title ─── */}
+      <h3 className="text-lg sm:text-xl font-bold font-heading text-white group-hover:text-cyan-300 transition-colors mb-3 leading-snug">
+        {project.title}
+      </h3>
+
+      {/* ─── Description ─── */}
+      <p className="text-xs sm:text-sm leading-relaxed text-slate-300 mb-5">
         {project.description}
       </p>
 
-      {/* ─── Tech stack badges ───────────────────────────────────────────────── */}
-      <div className="flex flex-wrap gap-2 mb-5">
+      {/* ─── Key Highlights ─── */}
+      {project.highlights && project.highlights.length > 0 && (
+        <div className="space-y-1.5 mb-5 pb-5 border-b border-slate-800/80">
+          {project.highlights.map((item, idx) => (
+            <div key={idx} className="flex items-start gap-2 text-xs text-slate-400">
+              <FiCheckCircle className="text-cyan-400 shrink-0 mt-0.5" size={12} />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* ─── Tech Stack Badges ─── */}
+      <div className="flex flex-wrap gap-1.5 mb-6 mt-auto">
         {project.tech.map(t => (
-          <SkillBadge key={t} label={t} small />
+          <span
+            key={t}
+            className="px-2 py-0.5 rounded-md text-[11px] font-mono font-medium text-slate-300 bg-slate-900/90 border border-slate-800"
+          >
+            {t}
+          </span>
         ))}
       </div>
 
-      {/* ─── Links ───────────────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-5 mt-auto pt-1">
+      {/* ─── Action Buttons ─── */}
+      <div className="flex items-center justify-between pt-2 border-t border-slate-800/60">
         {project.github && (
           <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            // flex + items-center ensures icon and text always align correctly
-            className="inline-flex items-center gap-1.5 text-sm font-mono font-medium transition-colors duration-200"
-            style={{ color: 'var(--color-muted)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--color-accent)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--color-muted)'}
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-300 hover:text-cyan-400 transition-colors py-1"
             aria-label={`GitHub repo for ${project.title}`}
           >
-            <FiGithub size={14} />
+            <FiGithub size={14} className="text-cyan-400" />
             <span>Source Code</span>
           </a>
         )}
-        {project.demo && (
+
+        {project.demo ? (
           <a
             href={project.demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-mono font-medium transition-colors duration-200"
-            style={{ color: 'var(--color-muted)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--color-accent)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--color-muted)'}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold glow-button"
             aria-label={`Live demo for ${project.title}`}
           >
-            <FiExternalLink size={14} />
-            <span>Live Demo</span>
+            <span>Live App</span>
+            <FiExternalLink size={12} />
           </a>
+        ) : (
+          <span className="text-[11px] font-mono text-slate-500">
+            Repo Benchmark
+          </span>
         )}
       </div>
     </motion.article>
   )
 }
+

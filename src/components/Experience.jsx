@@ -1,10 +1,8 @@
 // src/components/Experience.jsx
-// Work experience section displayed as a clean vertical timeline.
-// Each role sits in its own card with an accent-colored left border.
-// Bullet points use a custom accent dot instead of default browser bullets.
+// Modern Work Experience & Milestones timeline matching target portfolio.
 
 import { motion } from 'framer-motion'
-import { FiBriefcase, FiCalendar } from 'react-icons/fi'
+import { FiBriefcase, FiCalendar, FiMapPin, FiCheckCircle } from 'react-icons/fi'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import SectionHeading from './shared/SectionHeading'
 import { experience } from '../data/portfolioData'
@@ -14,20 +12,22 @@ const containerVariants = {
   visible: { transition: { staggerChildren: 0.12 } },
 }
 const itemVariants = {
-  hidden:  { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+  hidden:  { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 }
 
 export default function Experience() {
   const { ref, controls } = useScrollAnimation()
 
   return (
-    <section id="experience" className="section-padding">
+    <section id="experience" className="section-padding relative">
       <div className="max-w-6xl mx-auto px-5 md:px-8">
 
         <SectionHeading
-          label="// where I've worked"
-          heading="Experience"
+          tag="&gt;_ JOURNEY &amp; MILESTONES"
+          titlePrimary="Work Experience &amp;"
+          titleAccent="Milestones"
+          subtitle="Hands-on software development internships, production feature delivery, and engineering sprints."
           controls={controls}
           forwardedRef={ref}
         />
@@ -36,66 +36,52 @@ export default function Experience() {
           initial="hidden"
           animate={controls}
           variants={containerVariants}
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-6 max-w-4xl mx-auto"
         >
           {experience.map((job, i) => (
             <motion.div
               key={i}
               variants={itemVariants}
-              className="relative rounded-xl p-6 md:p-7"
-              style={{
-                backgroundColor: 'var(--color-surface-2)',
-                border:          '1px solid var(--color-border)',
-                // Accent left border — the "timeline" feel
-                borderLeft:      '3px solid var(--color-accent)',
-              }}
+              className="relative rounded-2xl p-7 sm:p-8 glass-card border-l-4 border-l-cyan-400 group"
             >
-              {/* ─── Role + company ──────────────────────────────────────────── */}
-              <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+              {/* ─── Role + Company + Badges ─── */}
+              <div className="flex flex-wrap items-start justify-between gap-4 mb-5 pb-5 border-b border-slate-800/80">
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <FiBriefcase size={14} style={{ color: 'var(--color-accent)' }} />
-                    <h3
-                      className="text-base md:text-lg font-semibold"
-                      style={{ color: 'var(--color-heading)', fontFamily: 'var(--font-mono)' }}
-                    >
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <FiBriefcase className="text-cyan-400" size={18} />
+                    <h3 className="text-lg sm:text-xl font-bold text-white font-heading">
                       {job.role}
                     </h3>
                   </div>
-                  <p
-                    className="text-sm font-medium pl-5"
-                    style={{ color: 'var(--color-accent)' }}
-                  >
-                    {job.company}
-                  </p>
+                  <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-300">
+                    <span className="text-cyan-400 font-semibold">{job.company}</span>
+                    <span className="text-slate-600">•</span>
+                    <span className="flex items-center gap-1 text-slate-400">
+                      <FiMapPin size={11} /> {job.location}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Period badge */}
-                <span
-                  className="flex items-center gap-1.5 text-xs font-mono px-3 py-1 rounded-full"
-                  style={{
-                    color:           'var(--color-muted)',
-                    backgroundColor: 'rgba(100, 116, 139, 0.1)',
-                  }}
-                >
-                  <FiCalendar size={11} />
-                  {job.period}
-                </span>
+                {/* Period & Status Badges */}
+                <div className="flex items-center gap-2">
+                  <span className="flex items-center gap-1.5 text-xs font-mono px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300">
+                    <FiCalendar size={12} className="text-cyan-400" />
+                    {job.period}
+                  </span>
+                  {job.badge && (
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      {job.badge}
+                    </span>
+                  )}
+                </div>
               </div>
 
-              {/* ─── Bullet points ───────────────────────────────────────────── */}
-              <ul className="flex flex-col gap-2 pl-0">
+              {/* ─── Bullet Points with Green/Cyan Checkmarks ─── */}
+              <ul className="space-y-3">
                 {job.points.map((point, pi) => (
-                  <li key={pi} className="flex items-start gap-3 text-sm leading-relaxed"
-                    style={{ color: 'var(--color-text)' }}
-                  >
-                    {/* Custom accent bullet */}
-                    <span
-                      className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: 'var(--color-accent)' }}
-                      aria-hidden="true"
-                    />
-                    {point}
+                  <li key={pi} className="flex items-start gap-3 text-xs sm:text-sm leading-relaxed text-slate-300">
+                    <FiCheckCircle className="text-cyan-400 shrink-0 mt-1" size={14} />
+                    <span>{point}</span>
                   </li>
                 ))}
               </ul>
@@ -107,3 +93,4 @@ export default function Experience() {
     </section>
   )
 }
+

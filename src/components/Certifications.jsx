@@ -1,7 +1,5 @@
 // src/components/Certifications.jsx
-// Compact list of certifications.
-// Rendered as small horizontal cards — not oversized, fits in a tight 2-column grid.
-// Each card shows the certification title, issuer, and date.
+// Modern Credentials & Certifications grid matching target portfolio.
 
 import { motion } from 'framer-motion'
 import { FiAward } from 'react-icons/fi'
@@ -14,20 +12,22 @@ const containerVariants = {
   visible: { transition: { staggerChildren: 0.08 } },
 }
 const itemVariants = {
-  hidden:  { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
+  hidden:  { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
 }
 
 export default function Certifications() {
   const { ref, controls } = useScrollAnimation()
 
   return (
-    <section id="certifications" className="section-padding">
+    <section id="certifications" className="section-padding relative">
       <div className="max-w-6xl mx-auto px-5 md:px-8">
 
         <SectionHeading
-          label="// credentials"
-          heading="Certifications"
+          tag="&gt;_ CREDENTIALS"
+          titlePrimary="Verified Certifications &amp;"
+          titleAccent="Honors"
+          subtitle="Accredited technical internships, engineering achievements, and development awards."
           controls={controls}
           forwardedRef={ref}
         />
@@ -36,39 +36,29 @@ export default function Certifications() {
           initial="hidden"
           animate={controls}
           variants={containerVariants}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           {certifications.map((cert, i) => (
             <motion.div
               key={i}
               variants={itemVariants}
-              className="flex items-start gap-4 p-5 rounded-xl"
-              style={{
-                backgroundColor: 'var(--color-surface-2)',
-                border:          '1px solid var(--color-border)',
-              }}
+              className="flex items-start gap-4 p-5 rounded-2xl glass-card group hover:border-cyan-500/40 transition-all duration-300"
             >
-              {/* Award icon */}
-              <div
-                className="mt-0.5 shrink-0 p-2 rounded-lg"
-                style={{ backgroundColor: 'rgba(0, 212, 255, 0.1)' }}
-              >
-                <FiAward size={15} style={{ color: 'var(--color-accent)' }} />
+              {/* Icon badge */}
+              <div className="mt-0.5 shrink-0 w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-lg border border-slate-800 group-hover:border-cyan-500/30 transition-colors shadow-sm">
+                {cert.icon || <FiAward className="text-cyan-400" size={18} />}
               </div>
 
               <div className="min-w-0">
-                <h3
-                  className="text-sm font-semibold leading-snug mb-1"
-                  style={{ color: 'var(--color-heading)' }}
-                >
+                <h3 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug mb-1 font-heading">
                   {cert.title}
                 </h3>
-                <p
-                  className="text-xs font-mono"
-                  style={{ color: 'var(--color-muted)' }}
-                >
-                  {cert.issuer} · {cert.date}
+                <p className="text-xs font-mono text-cyan-400 font-medium mb-0.5">
+                  {cert.issuer}
                 </p>
+                <span className="text-[11px] font-mono text-slate-400">
+                  {cert.date}
+                </span>
               </div>
             </motion.div>
           ))}
@@ -78,3 +68,4 @@ export default function Certifications() {
     </section>
   )
 }
+
