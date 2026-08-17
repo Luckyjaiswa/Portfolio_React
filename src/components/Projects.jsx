@@ -52,7 +52,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={controls}
           variants={cardVariants}
-          className="flex justify-center"
+          className="flex justify-center pb-6"
         >
           <a
             href={personal.github}

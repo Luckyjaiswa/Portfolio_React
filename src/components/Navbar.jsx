@@ -79,13 +79,13 @@ export default function Navbar({ theme, toggleTheme }) {
           </a>
 
           {/* ─── Desktop Links (Code Tabs) ─────────────────────────────────── */}
-          <ul className="hidden lg:flex items-center gap-1 bg-slate-950/40 p-1 rounded-xl border border-slate-800/50" role="list">
+          <ul className="hidden xl:flex items-center gap-0.5 bg-slate-950/40 p-1 rounded-xl border border-slate-800/50 overflow-hidden" role="list">
             {NAV_LINKS.map(link => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={() => handleLinkClick(link.href)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all duration-200 flex items-center gap-1.5 ${
+                  className={`px-2.5 py-1.5 rounded-lg text-[11px] font-mono transition-all duration-200 flex items-center gap-1 ${
                     activeLink === link.href
                       ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 shadow-[0_0_12px_rgba(0,242,254,0.15)]'
                       : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
@@ -142,9 +142,9 @@ export default function Navbar({ theme, toggleTheme }) {
               {theme === 'dark' ? <HiSun size={16} /> : <HiMoon size={16} />}
             </button>
 
-            {/* Mobile Hamburger */}
+            {/* Mobile Hamburger — shown below xl */}
             <button
-              className="lg:hidden p-2 rounded-xl text-slate-400 hover:text-white bg-slate-900/60 border border-slate-700/60 transition-colors"
+              className="xl:hidden p-2 rounded-xl text-slate-400 hover:text-white bg-slate-900/60 border border-slate-700/60 transition-colors"
               onClick={() => setMenuOpen(prev => !prev)}
               aria-label="Open navigation menu"
             >
@@ -162,7 +162,7 @@ export default function Navbar({ theme, toggleTheme }) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0, transition: { duration: 0.25 } }}
             exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-5 lg:hidden px-6"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-5 xl:hidden px-6"
             style={{ backgroundColor: 'var(--color-bg)' }}
           >
             <div className="w-full max-w-sm flex flex-col gap-3">

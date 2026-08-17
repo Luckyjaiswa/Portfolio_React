@@ -100,8 +100,9 @@ export default function Footer() {
       {/* ─── Floating Quick Action Button in Bottom Right ─── */}
       <a
         href="#contact"
-        className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 text-slate-950 flex items-center justify-center shadow-[0_0_25px_rgba(0,242,254,0.5)] hover:scale-110 active:scale-95 transition-transform"
+        className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 text-slate-950 flex items-center justify-center shadow-[0_0_25px_rgba(0,242,254,0.5)] hover:scale-110 active:scale-95 transition-transform"
         aria-label="Quick Message"
+        title="Send a quick message"
       >
         <FiMessageCircle size={22} className="fill-current" />
       </a>

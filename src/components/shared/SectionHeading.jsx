@@ -29,7 +29,7 @@ export default function SectionHeading({
         visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
         hidden:  { opacity: 0, y: 24 },
       }}
-      className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
+      className="text-center max-w-3xl mx-auto mb-8 md:mb-10"
     >
       {/* ─── Glowing Terminal Badge Pill ─────────────────────────────────── */}
       {tag && (

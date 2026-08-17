@@ -51,7 +51,7 @@ export default function App() {
       {/* Navbar receives theme + toggle so it can render the correct icon */}
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
-      <main>
+      <main style={{ overflowX: 'hidden' }}>
         {/* Section order matters — recruiter reads top to bottom */}
         <Hero />
         <About />

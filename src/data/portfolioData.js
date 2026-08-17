@@ -90,8 +90,8 @@ export const projects = [
       'Open-sourced repository with active community engagement on GitHub'
     ],
     tech:        ['Python', 'JavaScript', 'HTML5', 'CSS3', 'Git/GitHub'],
-    github:      'https://github.com/Luckyjaiswa/Gyan_Uday_Project',
-    demo:        null,
+    github:      'https://github.com/Luckyjaiswa/Gyan_Uday-project',
+    demo:        'https://gyan-uday-project-m90f.onrender.com/',
     featured:    true,
   },
   {
@@ -107,7 +107,23 @@ export const projects = [
     ],
     tech:        ['JavaScript (ES6+)', 'HTML5', 'CSS3', 'Git', 'Responsive Design'],
     github:      'https://github.com/Luckyjaiswa/BBD_Blog_Post',
-    demo:        null,
+    demo:        'https://bbd-blog-post.vercel.app/',
+    featured:    true,
+  },
+  {
+    id:          5,
+    title:       'Code & Chai — Developer Blog Platform',
+    category:    'Frontend Web Application',
+    period:      '2026',
+    description: 'A cozy developer-focused blog and resource hub built for the programming community. Features curated articles, tutorials, and a warm aesthetic that blends the joy of coding with the spirit of chai.',
+    highlights:  [
+      'Crafted a minimalist yet engaging UI tailored for developer readership',
+      'Implemented dynamic content rendering with smooth navigation flows',
+      'Deployed on Vercel with optimized asset delivery for fast page loads'
+    ],
+    tech:        ['JavaScript (ES6+)', 'HTML5', 'CSS3', 'Git', 'Vercel'],
+    github:      'https://github.com/Luckyjaiswa/code-and-chai',
+    demo:        'https://code-and-chai-bice.vercel.app/',
     featured:    true,
   },
 ]

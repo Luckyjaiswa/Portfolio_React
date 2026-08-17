@@ -35,7 +35,7 @@ export default function About() {
             hidden:  {},
             visible: { transition: { staggerChildren: 0.12 } },
           }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
         >
           {/* ══════════════════════════════════════════════════════
               LEFT CARD — Narrative & Bio
@@ -111,7 +111,7 @@ export default function About() {
 
               {/* Education Block */}
               {education.map((edu, idx) => (
-                <div key={idx} className="relative pl-7 pb-6 border-l-2 border-cyan-500/30 last:border-l-0 last:pb-0">
+                <div key={idx} className="relative pl-10 pb-6 border-l-2 border-cyan-500/30 last:border-l-0 last:pb-0">
                   <div className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-[#060913] border-2 border-cyan-400" />
                   
                   <span className="text-xs font-mono text-cyan-400 block mb-1">

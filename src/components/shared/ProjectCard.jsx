@@ -14,11 +14,11 @@ export default function ProjectCard({ project }) {
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       {/* ─── Category & Date Header ─── */}
-      <div className="flex items-center justify-between gap-3 mb-3">
-        <span className="text-xs font-mono font-medium px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+      <div className="flex items-center justify-between gap-3 mb-3 min-w-0">
+        <span className="text-xs font-mono font-medium px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 truncate min-w-0">
           {project.category || 'Engineering Project'}
         </span>
-        <span className="text-xs font-mono text-slate-400">
+        <span className="text-xs font-mono text-slate-400 shrink-0">
           {project.period}
         </span>
       </div>
@@ -58,16 +58,16 @@ export default function ProjectCard({ project }) {
       </div>
 
       {/* ─── Action Buttons ─── */}
-      <div className="flex items-center justify-between pt-2 border-t border-slate-800/60">
+      <div className="flex items-center justify-between pt-2 border-t border-slate-800/60 min-w-0">
         {project.github && (
           <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-300 hover:text-cyan-400 transition-colors py-1"
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-300 hover:text-cyan-400 transition-colors py-1 truncate"
             aria-label={`GitHub repo for ${project.title}`}
           >
-            <FiGithub size={14} className="text-cyan-400" />
+            <FiGithub size={14} className="text-cyan-400 shrink-0" />
             <span>Source Code</span>
           </a>
         )}
@@ -77,14 +77,14 @@ export default function ProjectCard({ project }) {
             href={project.demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold glow-button"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold glow-button shrink-0 ml-2"
             aria-label={`Live demo for ${project.title}`}
           >
             <span>Live App</span>
             <FiExternalLink size={12} />
           </a>
         ) : (
-          <span className="text-[11px] font-mono text-slate-500">
+          <span className="text-[11px] font-mono text-slate-500 shrink-0 ml-auto">
             Repo Benchmark
           </span>
         )}

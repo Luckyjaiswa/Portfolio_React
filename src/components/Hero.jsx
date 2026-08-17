@@ -79,7 +79,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-center pt-28 sm:pt-36 pb-16 overflow-hidden cyber-grid-bg"
+      className="relative min-h-screen flex flex-col justify-center pt-32 sm:pt-40 pb-16 overflow-hidden cyber-grid-bg"
     >
       {/* ─── Ambient Radial Glows ─── */}
       <div
@@ -118,12 +118,12 @@ export default function Hero() {
           {/* ══════════════════════════════════════════════════════
               LEFT COLUMN — Typography & Bio
           ══════════════════════════════════════════════════════ */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-6 xl:col-span-7 min-w-0">
 
             {/* ─── Massive Headline with Enhanced Line Height & Contrast ─── */}
             <motion.h1
               {...fadeUp(0.12)}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold font-heading tracking-tight leading-[1.25] sm:leading-[1.22] md:leading-[1.18] text-slate-100 mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-[3.25rem] font-extrabold font-heading tracking-tight leading-[1.25] sm:leading-[1.22] md:leading-[1.18] text-slate-100 mb-6"
             >
               Full-Stack Developer &amp;{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-cyan-400 to-blue-500">
@@ -215,7 +215,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
-            className="lg:col-span-5"
+            className="lg:col-span-6 xl:col-span-5 min-w-0"
           >
             <TerminalWindow />
           </motion.div>
